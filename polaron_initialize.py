@@ -58,7 +58,7 @@ for i in range(len(ele)):
   vars()[ele[i]] = np.dot(ele_coor, latt.T)
 #  np.savetxt('%s' % ele[i], ele[i], fmt="%10.5f")
 
-
+# distorition function
 def distortion(center):
   "To enlongate bonds around selected center atom"
   for j in range(O.shape[0]):
@@ -72,8 +72,11 @@ def distortion(center):
       print(O[j])
       print("\n")
 
-distortion(8)
-distortion(21)
+
+# get input from keyboard
+center_Ti = input("Input center atom number in array form:\n").split()
+for i in center_Ti:
+  distortion(int(i)-1)
 
 out = open('POSCAR', 'w+')
 out.write(''.join(head))
@@ -86,4 +89,3 @@ for i in range(H_O.shape[0]):
 for i in range(H_Ti.shape[0]):
   out.write(' '.join(str(x) for x in H_Ti[i]) + ' ' + str(' '.join(fftt[i+O.shape[0]+Ti.shape[0]+H_O.shape[0]])) + '\n')
 out.close()
-
